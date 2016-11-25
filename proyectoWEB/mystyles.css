@@ -1,0 +1,31 @@
+#login_main_div,#register_main_div{
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+}
+#navigationbar{
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+
+}
+#map {
+  height: 100%;
+
+}
+#amigosDiv{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  height: 500px;
+  border: 3px solid #73AD21;
+}
+/* Optional: Makes the sample page fill the window. */
+#maphtml, #mapbody {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+}

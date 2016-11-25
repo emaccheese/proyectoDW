@@ -1,0 +1,80 @@
+The initial page shall provide the user an option to sign in to the system using his personal user name and password.
+the initial page shall provide a text field for the user to type in his 5 to 15 character user name or email address that is related to the his account.
+The initial page shall provide a text field for the user to type in his 8 to 11 character password.
+If the user name or password that the user typed in is incorrect the sistem shall show an error message that says the user name or password is wrong.
+The initial page shall provide the user an option to change his password in case he does not remember it.
+The initial page shall provide a text field for the email address related to the users account whos password has been forgotten.
+If the email address that the user types in the text field for email address is not located in the database the initial page shall show an error message that says "the email does not exist".
+The initial page shall provide the user an option to register as a new user.
+The register page shall provide a text field so the user can type in his user name.
+The user shall provide a user name that is minimum 5 characters.
+The user shall provide a user name that is maximum 15 characters.
+The register page shall provide a text field so the user can type in his password.
+The user shall provide a password that is minimum 8 characters.
+The user shall provide a password that is maximum 11 characters.
+The website shall provide the user access to its main content after the user name and password have both been confirmed as valid by the backend of the website.
+The main page shall provide a navigation bar located at the top of the page with the options to navigate to other parts of the website.
+The other parts of the website shall include the following: Profile, Friends, Map, Troops, Store and Leader Boards.
+The main page shall provide a view of a geographical map.
+The geographical map shall provide a view of a marker on top of the users real time location.
+The geographical map shall provide a view of a marker on top of the real time location of the other users logged in to the website.
+The geographical map shall show a marker on top of location of the other users that are logged in to the website.
+The geographical map shall show a straight line that is painted from the marker that is on top of user location to the location of the marker that the user has clicked on.
+The geographical map shall show the distance calculated in meters that is between the users marker and the marker the user has clicked on.
+the geographical map shall show a drop down menu on top of the marker that the user has clicked on.
+The drop down menu located on top of the marker that the user has clicked on shall show the following options : Challenge, Send Friend Request, Show Profile, Send Message.
+The challenge option shall send a challenge notification to the user that is located on top of marker within the geographical map.
+If the user that receives the challenge notification accepts the challenge the website shall launch the archers multiplayer game betweent both of the users, the user who sent the request and the one who accepted it.
+The website shall show a loading screen while it loads the game to the main screen.
+The website shall show the main game page after loading all the necesary resources needed to be loaded for the game to start.
+The main game page shall first show a full view of the whole map to the user.
+The main game map shall display both users army on the map.
+The main game map shall show the first user army on the far left part of the map.
+The main game map shall show the second user army on the far ritght part of the map.
+The main game page shall zoom in to users army taking 25% of the screen view of each individual user and 75% of the view should be plain land	.
+If the users geographical location changes and the distance between him and the other users geographical location is now less than the distance it was before the location changed then the users army shall move 5 pixels backward in the plain field.
+If the users geographical location changes and the distance between him and the other users geographical location is now more than the distance it was before the location changed then the users army shall move 5 pixels forward in the plain field.
+The main game page shall show a count down from 3 to 1 and then show the message go indicating that the game has begun.
+The main game shall have a duration of 3 minutes.
+The main game shall have an alarm show at 2 minutes and 45 seconds that indicates the 3 minutes of gamplay are up.
+If the user that receives the challenge notification denies the challenge the website shall send a notification back to the other user informing him of the denial.
+The geographical map shall have a vertical scrolling bar located at the bottom of the page.
+The vertical scrolling bar shall zoom in to the geographical map if it is dragged to the right of the page.
+The vertical scrolling bar shall zoom out to the geographical map if it is dragged to the left of the page.
+The profile page shall show the users name.
+The profile page shall show the users email address.
+The profile page shall show a button with the function of enabling the editing of the users credentials.
+The profile page shall show a table with the users game statistics.
+The friends page shall show the users list of friends.
+The friends page shall show a button to delete a friend next to each friends name.
+The friends page shall show a button to send a message next to each friends name.
+The friends page shall show a button to see a friends profile next to each friends name.
+The troops page shall show a table with the users troops information one unit per row.
+The table shall include a column that contains an illustration of the unit.
+The table shall include a column that contains the name of the unit in text format.
+The table shall include a column that contains level of the unit in number format.
+The table shall include a column that contains level of the list of arrows available to be equipped to the unit format.
+The list of arrows available to be equipped shall be normal arrow, triple arrow, and freeze arrow.
+The shop page shall show a number field that represents the amount of in game money the user has.
+The shop page shall show a table with the arrows that the user can purchase for his troops to equip.
+The table in the shop page shall have a row for each type of arrow available to purchase by the user.
+The rows in the table shall have column that contains an illustration for each type of arrow available.
+The rows in the table shall have column that contains the name for each type of arrow available.
+The rows in the table shall have column that contains a button that will bring up the arrows details for each type of arrow available.
+The rows in the table shall have column that contains a number field for each type of arrow available.
+The rows in the table shall have column that contains a button that will enable the user to purchase units of the arrow in the row the column is on.
+The leader boards page shall show a table with the information of each of the users friends.
+The leader boards page shall show a dropdown list field that shows the options for filtering the list by a column.
+The table in the leader boards page shall be ordered in descending order by the amount of points won in the game by default.
+The rows in the table shall have a column that shows the name each friend.
+The rows in the table shall have a column that shows the ammount of matches won in the game.
+The rows in the table shall have a column that shows the ammount of matches lost in the game.
+The rows in the table shall have a column that shows the ammount points won during all the matches played in the game.
+
+
+
+
+
+
+
+
