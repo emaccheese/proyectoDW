@@ -5,6 +5,10 @@
   margin-bottom: 50px;
 
 }
+.profileContent{
+  margin-left: 200px;
+  margin-right: 200px;
+}
 #navigationbar{
   margin-bottom: 0px;
   padding-bottom: 0px;
@@ -13,6 +17,13 @@
 #map {
   height: 100%;
 
+}
+#proFilePic{
+  width: 200px;
+  height: 200px;
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-top: 50px;
 }
 #amigosDiv{
   position: fixed;

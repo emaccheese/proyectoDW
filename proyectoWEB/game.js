@@ -15,6 +15,7 @@ var testUnit;
 var tickCounter = 0;
 var i=0;
 var kDown = false;
+var endGame = false;
 //tecla presionada
 document.addEventListener('keydown', function(eve) {
 	PRESSING[eve.keyCode] = true;
@@ -84,20 +85,13 @@ function createSpritesSheets(){
 		"frames": {"height": 128,"width": 128},
 		"animations": {explode: {frames:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],next: false,speed: 0.5}}
 	});
-  this.unitWalking = new createjs.SpriteSheet({
-    "images":["resources/imgs/archerWalk.png"],
-    "frames":{"height":128,"width":108},
-    "animations": {
-      moveAnimation: {frames:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],next: false,speed: 0.5}
-    }
-  });
 	this.unit = new createjs.SpriteSheet({
     "images":["resources/imgs/archerStanding.png"],
     "frames":{"height":128,"width":72, "count":5},
     "animations": {
       stand: 0,
-      walkR:{frames:[0,1,2,3,4],next: "walkR",speed: 0.2},
-      walkL: {frames:[0,1,2,3,4],next: "walkL",speed: 0.2}
+      walkR:{frames:[0,1,2,3,4],next: "walkR",speed: 0.3},
+      walkL: {frames:[0,1,2,3,4],next: "walkL",speed: 0.3}
     }
   });
 }
@@ -106,9 +100,7 @@ function armyClass(amount,numPlayer){
   var x=+(WIDTH/10)+50;
 	var y=HEIGHT-50;
 
-	var width=32;
-	var height=32;
-	var playerSprite=spritesheets.player;
+
 	var damage;
 	var z=Math.random()*WIDTH;
 	var speed=10;
@@ -306,4 +298,74 @@ function KeyDetect(){
         player.setFiring(true);
 	if (PRESSING[13])
 		createjs.Ticker.paused = pause;
+}
+
+function playerInfoClass(){
+	var scorePoints=0;
+	var lives=1;
+	var shield=10;
+	var x=WIDTH;
+	var y=15;
+
+	var Text = new createjs.Text("Score: "+scorePoints+"	 Shield:"+shield+"	Lives: "+lives, "20px Arial", "#ffffff");
+	Text.x = x;
+	Text.y= y;
+	Text.textBaseline = "alphabetic";
+	stage.addChild(Text);
+
+	var Text1 = new createjs.Text("Level "+level,"20px Arial", "#ffffff");
+	Text1.x = WIDTH;
+	Text1.y= HEIGHT/2;
+	Text1.textBaseline = "alphabetic";
+	stage.addChild(Text1);
+
+	var Text2 = new createjs.Text("GAME OVER","60px Arial", "#ffffff");
+	Text2.x = WIDTH/4;
+	Text2.y= HEIGHT/2;
+	Text2.textBaseline = "alphabetic";
+	stage.addChild(Text2);
+	Text2.alpha=0;
+	var z=WIDTH/2;
+	var a=0;
+	var alfa=1;
+	var MessageNewLevel=false;
+
+	this.scoreUpdate=function(points){
+		scorePoints=scorePoints + points;
+	}
+	this.update=function(){
+		if(!endGame){
+			if(MessageNewLevel)
+			this.LevelMessage();
+			Text1.text="Level "+level;
+			shield=player.getShield();
+			lives=player.getLives();
+			Text.text="Score: "+scorePoints+"     Shield:  "+shield+"   Lives: "+lives;
+			if(x>0)
+			Text.x=x-=5;
+		}else
+			this.gameOverMessage();
+	}
+	this.LevelMessage=function(){
+		if(a<100){
+			a+=0.1;
+			Text1.setTransform(z, HEIGHT/2, a, a);
+			Text1.alpha=alfa-=0.01;
+			Text1.x=z-=4;
+		}else{
+			Text1.setTransform(0, 0, 1, 1);
+			a=0;
+			MessageNewLevel=false;
+			z=WIDTH/2;
+			alfa=1;
+		}
+	}
+
+	this.gameOverMessage=function(){
+		Text1.alpha=0;
+			if(alfa < 0)
+				alfa=1;
+			alfa-=0.01;
+			Text2.alpha=alfa;
+	}
 }

@@ -4,7 +4,9 @@
     <title>Inicio</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <script src = "mapLogic.js"> </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7">
+
+    <script src = "perfil.js"> </script>
     <link rel="stylesheet" type="text/css" href="mystyles.css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   </head>
@@ -31,6 +33,47 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+    <div>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Panel heading</div>
+        <div  class="panel-body profileContent">
+          <p>
+            <img id="proFilePic" src="resources/imgs/profile_pic_1.jpg"alt="..." class="img-rounded">
+            <p id="editPic">
 
+            </p>
+          </p>
+
+          <div class="form-group profileContent">
+  					<label for="user">User Name</label>
+  					<input type="text" id="user" size="20" placeholder="Username" disabled></input>
+  				</div>
+  				<div class="form-group profileContent">
+  					<label for="pass">Password</label>
+  					<input type="text" id="pass" size="20" placeholder="Password" disabled></input>
+  				</div>
+  				<!-- <div class="form-group">
+  					<label for="confpass">Confirm Password</label>
+  						<input type="text" id="confpass" size="20" placeholder="Password"></input>
+  				</div> -->
+  				<div class="form-group profileContent">
+  					<input type="button" id="btnEditProfile" value="Editar Perfil"></input>
+  				</div>
+
+  				<div id = "warning">
+        </div>
+
+        <!-- Table -->
+        <table id="tableStatistics" class="table">
+          <tr>
+            <th>Partida</th>
+            <th>Puntos Ganados</th>
+            <th>Perdido</th>
+
+          </tr>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
