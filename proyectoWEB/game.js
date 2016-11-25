@@ -12,27 +12,29 @@ var gameTime;
 var gameEnd = false;
 var PRESSING=[];
 var testUnit;
+var tickCounter = 0;
+var i=0;
+var kDown = false;
 //tecla presionada
 document.addEventListener('keydown', function(eve) {
-	lastPress = eve.keyCode;
 	PRESSING[eve.keyCode] = true;
 }, false);
 
 //tecla soltada
 document.addEventListener('keyup', function(eve) {
 	PRESSING[eve.keyCode] = false;
+  kDown = false;
 }, false);
 function mouseClick(evt){
     if(evt.which==1){
 
     }
-
 }
 function init(){
   window.addEventListener('click',mouseClick,false);
   canvas =document.getElementById('canvas');
 	//console.log("Running...");
-	canvas.style.backgroundColor = "#000000";
+	canvas.style.backgroundColor = "#2E64FE";
 	WIDTH=canvas.width;
 	HEIGHT=canvas.height;
 
@@ -57,18 +59,16 @@ function run(){
 	backgroundMusic = createjs.Sound.play("backgroundMusic",createjs.Sound.INTERRUPT_ANY, 0, 0, -1, 1, 0);
   // player1Army = new armyClass(player1ArmySize,1);
   // player2Army = new armyClass(player2ArmySize,2);
-	testUnit = new unitClass();
+	testUnit = new unitClass(1);
 	createjs.Ticker.addEventListener("tick", gameloop);
 	createjs.Ticker.setFPS(60);
 	startTime=new Date().getTime();
 
 }
-var tickCounter = 0;
-var i=0;
+
 function gameloop(){
-  if(tickCounter%60){
-    console.log(i++);
-  }
+
+  KeyDetect();
 	testUnit.update();
 	stage.update();
 }
@@ -87,12 +87,18 @@ function createSpritesSheets(){
   this.unitWalking = new createjs.SpriteSheet({
     "images":["resources/imgs/archerWalk.png"],
     "frames":{"height":128,"width":108},
-    "animations": {moveAnimation: {frames:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],next: false,speed: 0.5}}
+    "animations": {
+      moveAnimation: {frames:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],next: false,speed: 0.5}
+    }
   });
 	this.unit = new createjs.SpriteSheet({
     "images":["resources/imgs/archerStanding.png"],
-    "frames":{"height":128,"width":75, "count":3},
-    "animations": {stand: 0}
+    "frames":{"height":128,"width":72, "count":5},
+    "animations": {
+      stand: 0,
+      walkR:{frames:[0,1,2,3,4],next: "walkR",speed: 0.2},
+      walkL: {frames:[0,1,2,3,4],next: "walkL",speed: 0.2}
+    }
   });
 }
 
@@ -156,21 +162,18 @@ function armyClass(amount,numPlayer){
 	}
 }
 function unitClass(numP){
-	var x=WIDTH-(WIDTH-15);
-	var y=y=HEIGHT- (HEIGHT -);;
 	var dx=0;
 	var dy=0;
 	var width=12;
 	var height=32;
+  var x=WIDTH-(WIDTH-15);
+  var y=HEIGHT-128;
 	var shield=10;
 	var damage;
 	var dead=false;
 	var z=Math.random()*WIDTH;
 	var state="live";
 	var speed=10;
-	var unitWalkingSprite=spritesheets.unitWalking;
-
-	var unitDieSprite=spritesheets.explosion;
 	var soundPlayerDie;
 	var left;
 	var right;
@@ -187,111 +190,47 @@ function unitClass(numP){
 	var doubleProyectile=false;
 	var tripleProyectile=false;
 	var angle=270;
-	var unit = new createjs.Sprite(spritesheets.unit, "stand");
-
+	var unit = new createjs.Sprite(spritesheets.unit);
+  unit.gotoAndPlay("walkL");
 	unit.x =x;
 	unit.y = y;
-	unit.play();
 	stage.addChild(unit);
+  this.update=function(){
+    if(left||right){
+      if (left) {
+        dx = -speed;
+      }
+      if (right) {
+        dx = speed;
+      }
+      x += dx;
+      if (x < 0)
+        x = 0;
+      if (x > WIDTH - width)
+        x = WIDTH- width;
+      dx = 0;
+      //Asignamos nuevas coordenadas
+      unit.x=x;
 
-	this.getShield=function(){
-		return shield;
-	}
-	this.getLives=function(){
-		return lives;
-	}
-	this.setShield=function(value){
-		shield+=value;
-		if(shield >100)
-			shield=100;
-	}
-	this.setSpeed=function(){
-		if(speed++ > 15)
-		speed=15;
-	}
+      if(kDown == false){
+        unit.gotoAndPlay("walkR");
+        console.log("kdown false")
+        kDown = true;
+      }
+    }else{
+      unit.gotoAndStop("walkR");
+    }
 
-	this.setProyectilDamage=function(){
-		if(proyectilDamage++ > 50)
-			proyectilDamage=20;
-	}
-	this.setProyectilSize=function(){
-		proyectilSize=2;
-	}
-	this.setMaxProyectils=function(value){
-		maxProyectils=value;
-	}
-	this.setFiringDelay=function(value){
-		firingDelay=value;
-	}
-	this.update=function(){
-		// if(dead){
-		// 	this.explode();
-		// 	this.removeFromStage();
-		// 	dead=false;
-		// 	return true;
-		// }
-		if (left) {
-			dx = -speed;
-			left=false;
-		}
-		if (right) {
-			dx = speed;
-			right=false;
-		}
-		x += dx;
-		y += dy;
-		//console.log("x: "+x+"y: "+y);
+  }
 
-		if (x < 0)
-			x = 0;
-		if (y < 0)
-			y = 0;
-		if (x > WIDTH - width)
-			x = WIDTH- width;
-		if (y > HEIGHT - height)
-			y = HEIGHT - height;
-		dx = 0;
-		dy = 0;
 
-		//Asignamos nuevas coordenadas
-		unit.x=x;
-		unit.y=y;
 
-		// if (firing){
-		// 	elapsed=new Date().getTime()-firingTimer;
-		// 	if (elapsed > firingDelay) {
-		// 		if(proyectils.length<maxProyectils){
-		// 			if(!doubleProyectile&&!tripleProyectile)
-		// 				this.proyectilsNormal();
-		// 			if(doubleProyectile)
-		// 				this.proyectilsDouble();
-		// 			if(tripleProyectile)
-		// 				this.proyectilsTriple();
-		// 		}
-		// 		firingTimer=new Date().getTime();
-		// 	}
-		// 	firing=false;
-		// }
-	}
-	this.proyectilsNormal=function(){
-		proyectils.push(new proyectilClass(angle, x+width/2.5 , y - height/2,proyectilSize));
-	}
 	this.setLeft=function(b) {
 		left = b;
 	}
 	this.setRight=function(b) {
 		right = b;
 	}
-	this.setUp=function( b) {
-		up = b;
-	}
-	this.setDown=function( b) {
-		down = b;
-	}
-	this.setFiring=function(b) {
-		firing = b;
-	}
-
 	this.getX=function(){
 		return x;
 	}
@@ -347,10 +286,18 @@ function unitClass(numP){
 	}
 }
 function KeyDetect(){
-	if (PRESSING[39])
-         unit.setRight(true);
-    if (PRESSING[37])
-        unit.setLeft(true);
+	if (PRESSING[39]){
+    testUnit.setRight(true);
+  }else{
+    testUnit.setRight(false);
+  }
+
+    if (PRESSING[37]){
+      testUnit.setLeft(true);
+    }else {
+      testUnit.setLeft(false);
+    }
+
     if (PRESSING[40])
         // army.setDown(true);
     if (PRESSING[38])
